@@ -1,14 +1,15 @@
 #include <bits/stdc++.h>
-#define MAX 401
-
 using namespace std;
+
+constexpr int MAX = 401;
+constexpr int PADDING = 2;
 
 int n;
 char board[MAX][MAX];
 
 void input();
 void solve();
-void makeStar19th(int x, int y, int len);
+void drawStars(int x, int y, int len);
 void printBoard();
 
 int main() {
@@ -21,39 +22,47 @@ int main() {
     return 0;
 }
 
-void input() { cin >> n; }
+void input() {
+    cin >> n;
+}
 
-void solve() { 
-    // init
-    int dist = 4 * n - 3;
-    for(int i = 0; i < dist; i++)
-        for(int j = 0; j < dist; j++)
-            board[i][j] = ' ';
+void solve() {
+    int size = 4 * n - 3;
 
-    makeStar19th(0, 0, n); 
+    // 초기화
+    for (int i = 0; i < size; ++i)
+        fill(board[i], board[i] + size, ' ');
+
+    drawStars(0, 0, n);
     printBoard();
 }
 
-void makeStar19th(int x, int y, int len) {
-    if(len == 1) { board[x][y] = '*'; return ; }
-    
-    int dist = (4 * len - 3);
-    for(int i = x; i < x + dist; i++) {
-        board[i][y] = '*';
-        board[i][y + dist - 1] = '*';
-    }
-    for(int i = y; i < y + dist; i++) {
-        board[x][i] = '*';
-        board[x + dist - 1][i] = '*';
+void drawStars(int x, int y, int len) {
+    int size = 4 * len - 3;
+
+    // 기저 조건: 가장 안쪽 별
+    if (len == 1) {
+        board[x][y] = '*';
+        return;
     }
 
-    makeStar19th(x + 2, y + 2, len - 1);
+    // 테두리 그리기
+    for (int i = 0; i < size; ++i) {
+        board[x][y + i] = '*';                 // 상단 가로
+        board[x + size - 1][y + i] = '*';      // 하단 가로
+        board[x + i][y] = '*';                 // 좌측 세로
+        board[x + i][y + size - 1] = '*';      // 우측 세로
+    }
+
+    // 안쪽 재귀 호출
+    drawStars(x + PADDING, y + PADDING, len - 1);
 }
 
 void printBoard() {
-    int dist = (4 * n - 3);
-    for(int i = 0; i < dist; i++) {
-        for(int j = 0; j < dist; j++)
+    int size = 4 * n - 3;
+
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j)
             cout << board[i][j];
         cout << '\n';
     }
