@@ -1,32 +1,22 @@
-# Prerequisites
-*.d
+# 빌드 결과물
+/build/
+/bin/
+*.class
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# CPH 생성 파일 제외
+/testcases/
+**/*.cph
 
-# Precompiled Headers
-*.gch
-*.pch
+# VSCode 개인 설정 제외
+.vscode/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Mac 시스템 파일 무시
+.DS_Store
 
-# Fortran module files
-*.mod
-*.smod
+# Windows 시스템 파일 무시
+Thumbs.db
+desktop.ini
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
+# 실행 파일 무시 (macOS, Linux)
 *.out
-*.app
+*.exe
