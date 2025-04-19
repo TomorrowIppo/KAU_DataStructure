@@ -1,4 +1,5 @@
 #include <iostream>
+#define ENDL '\n'
 
 using namespace std;
 
@@ -41,6 +42,14 @@ DoublyLinkedList<T>::DoublyLinkedList()
 template <typename T>
 DoublyLinkedList<T>::~DoublyLinkedList()
 {
+    cout << ENDL;
+    while(this->head != nullptr) {
+        Node<T>* removed = this->head;
+        this->head = removed->next;
+
+        cout << "Deleting : " << removed->value << ENDL;
+        delete removed;
+    }
 }
 
 template <typename T>
@@ -98,42 +107,48 @@ void DoublyLinkedList<T>::Update()
 template <typename T>
 void DoublyLinkedList<T>::Print()
 {
+    cout << "[ ";
     Node<T>* cur = this->head;
     while(cur != nullptr) {
-        cout << cur->value << ' ';
+        cout << cur->value;
         cur = cur->next;
+
+        if(cur != nullptr) cout << " <-> ";
     }
+    cout << " ]" << ENDL;
 }
 #pragma endregion
 
 int main() {
     // 이중연결리스트 생성
-    DoublyLinkedList<char> ls;
+    DoublyLinkedList<char> *ls = new DoublyLinkedList<char>();
 
     // A 노드 생성 후 리스트에 삽입
-    Node<char>* node1 = new Node<char>('A');
-    ls.Insert(nullptr, node1);
+    Node<char> *node1 = new Node<char>('A');
+    ls->Insert(nullptr, node1);
     
     // A 노드를 탐색 후 A 노드 뒤에 B 삽입 [A <-> B]
     Node<char>* finder = nullptr;
-    finder = ls.Search('A');
+    finder = ls->Search('A');
     Node<char>* node2 = new Node<char>('B');
-    ls.Insert(finder, node2);
+    ls->Insert(finder, node2);
 
     // A 노드를 탐색 후 A 노드 뒤에 C 삽입 [A <-> C <-> B]
-    finder = ls.Search('A');
+    finder = ls->Search('A');
     Node<char>* node3 = new Node<char>('C');
-    ls.Insert(finder, node3);
+    ls->Insert(finder, node3);
 
     // B 노드를 탐색 후 B 노드 뒤에 D 삽입 [A <-> C <-> B <-> D]
-    finder = ls.Search('B');
+    finder = ls->Search('B');
     Node<char>* node4 = new Node<char>('D');
-    ls.Insert(finder, node4);
+    ls->Insert(finder, node4);
 
     // C 노드를 탐색 후 C 노드 삭제 [A <-> B <-> D]
-    finder = ls.Search('C');
-    ls.Delete(finder);
+    finder = ls->Search('C');
+    ls->Delete(finder);
 
     // 리스트 출력
-    ls.Print();
+    ls->Print();
+
+    delete ls;
 }
