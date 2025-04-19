@@ -2,6 +2,7 @@
 
 using namespace std;
 
+#pragma region DoublyLinkedList
 template <typename T>
 class Node {
 public:
@@ -103,6 +104,7 @@ void DoublyLinkedList<T>::Print()
         cur = cur->next;
     }
 }
+#pragma endregion
 
 int main() {
     // 이중연결리스트 생성

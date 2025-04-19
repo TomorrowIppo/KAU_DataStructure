@@ -2,6 +2,7 @@
 
 using namespace std;
 
+#pragma region SimplyLinkedList
 template <typename T>
 class Node {
 public:
@@ -95,6 +96,8 @@ void SimplyLinkedList<T>::Print()
         cur = cur->link;
     }
 }
+
+#pragma endregion
 
 int main() {
     // 단일연결리스트 생성
