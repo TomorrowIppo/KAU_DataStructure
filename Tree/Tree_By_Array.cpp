@@ -68,7 +68,7 @@ int find_root(const vector<int>& parent) {
 }
 
 void printTree(int node, const vector<int>& parent, string indent, bool is_last) {
-    // TODO : Implement printTree Func. by preorder traversal
+    // 전위순회 기반으로 구현
     
     cout << indent << (is_last ? "└── " : "├── ") << "Node " << node << '\n';
 
