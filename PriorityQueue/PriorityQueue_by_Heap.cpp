@@ -72,6 +72,7 @@ public:
     ~PriorityQueue();
     void Insert(int key, T value);          // push()
     Node<T> Delete();                       // pop()
+    Node<T> Top();
     bool isEmpty() const;
     bool isFull() const;
     void printInfo() const;
@@ -119,7 +120,6 @@ PriorityQueue<T>::~PriorityQueue()
 template <typename T>
 void PriorityQueue<T>::Insert(int key, T value) 
 {
-    // 여기 구현
     if(isFull()) 
         throw logic_error("Heap is Full.");
 
@@ -140,7 +140,6 @@ void PriorityQueue<T>::Insert(int key, T value)
 template <typename T>
 Node<T> PriorityQueue<T>::Delete() 
 {
-    // 여기 구현
     if(isEmpty()) 
         throw logic_error("Heap is Empty.");
 
@@ -166,6 +165,15 @@ Node<T> PriorityQueue<T>::Delete()
     }
 
     return ret;
+}
+
+template <typename T>
+Node<T> PriorityQueue<T>::Top()
+{
+    if(isEmpty()) 
+        throw logic_error("Heap is Empty.");
+
+    return this->node[1];
 }
 
 template <typename T>
@@ -224,21 +232,26 @@ int main()
     cin.tie(nullptr);
 
     PriorityQueue<char>* pq = new PriorityQueue<char>(HeapType::MIN);
-    pq->Insert(10, 'A');
-    pq->Insert(40, 'B');
-    pq->Insert(30, 'C');
+    pq->Insert(9, 'A');
+    pq->Insert(7, 'B');
+    pq->Insert(6, 'C');
     pq->Insert(5, 'D');
-    pq->Insert(12, 'E');
-    pq->Insert(6, 'F');
-    pq->Insert(15, 'G');
-    pq->Insert(9, 'H');
-    pq->Insert(60, 'I');
+    pq->Insert(4, 'E');
+    pq->Insert(5, 'F');
+    pq->Insert(3, 'G');
+    pq->Insert(2, 'H');
+    pq->Insert(1, 'I');
+    pq->Insert(3, 'J');
+    pq->Insert(2, 'K');
 
     pq->printInfo();
     cout << "------------------------------------------" << ENDL;
 
-    auto top = pq->Delete();
-    cout << "POP : (" << top.getKey() << "," << top.getValue() << ")" << ENDL;
+    auto pop = pq->Delete();
+    cout << "Pop : (" << pop.getKey() << "," << pop.getValue() << ")" << ENDL;
+
+    auto top = pq->Top();
+    cout << "Top : (" << top.getKey() << "," << top.getValue() << ")" << ENDL;
 
     pq->printInfo();
 
