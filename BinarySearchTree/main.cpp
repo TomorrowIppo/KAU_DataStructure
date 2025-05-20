@@ -18,11 +18,18 @@ int main()
 
     bst->remove(1);
 
-    cout << "[Inorder]" << ENDL;
+    cout << "[Inorder]" << endl;
     bst->inorder();
-    cout << "---------------------------------------------------------" << ENDL;
-    cout << "[BST Info]" << ENDL;
+    cout << "---------------------------------------------------------" << endl;
+    cout << "[BST Info]" << endl;
     bst->printInfo();
+    cout << "---------------------------------------------------------" << endl;
+    auto find = bst->search(6);
+    if(find) 
+        cout << "(" << find->get_key() << ", " << find->get_value() << ") found" << endl;
+    else
+        cout << "not found" << endl;
+    cout << "---------------------------------------------------------" << endl;
 
     delete bst;
 
