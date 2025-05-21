@@ -14,9 +14,9 @@ int main()
     bst->insert(2, 'E');
     bst->insert(13, 'F');
     bst->insert(10, 'G');
-    bst->insert(1, 'H');
+    bst->insert(5, 'H');
 
-    bst->remove(1);
+    bst->remove(5);
 
     cout << "[Inorder]" << endl;
     bst->inorder();

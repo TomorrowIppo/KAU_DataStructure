@@ -43,12 +43,15 @@ template <typename T>
 void BST<T>::insert(int key, const T& value) {
     Node<T>* node = new Node<T>(key, value);
     root = recursive_insert(root, node);
-    if (root) root->set_parent(nullptr); // root´Â ºÎ¸ğ ¾øÀ½À» º¸Àå
+    if (root) root->set_parent(nullptr); // rootëŠ” ë¶€ëª¨ ì—†ìŒì„ ë³´ì¥
 }
 
 template <typename T>
 Node<T>* BST<T>::recursive_insert(Node<T>* cur, Node<T>* node) {
     if (!cur) return node;
+
+    if (node->get_key() == cur->get_key())
+        throw std::invalid_argument("Insert failed: Duplicate key not allowed.");
 
     if (node->get_key() < cur->get_key()) {
         Node<T>* left = recursive_insert(cur->get_left(), node);
@@ -77,7 +80,7 @@ Node<T>* BST<T>::search(int key) const {
 template <typename T>
 void BST<T>::remove(int key) {
     root = remove_node(root, key);
-    if (root) root->set_parent(nullptr); // root´Â ºÎ¸ğ ¾øÀ½À» º¸ÀåÀå
+    if (root) root->set_parent(nullptr); // rootëŠ” ë¶€ëª¨ ì—†ìŒì„ ë³´ì¥ì¥
 }
 
 template <typename T>
@@ -146,7 +149,7 @@ void BST<T>::printInfo(Node<T>* node, std::string indent, bool is_last, Directio
 
     if (!node) node = root;
 
-    cout << indent << (is_last ? "¦¦¦¡¦¡ " : "¦§¦¡¦¡ ");
+    cout << indent << (is_last ? "â””â”€â”€ " : "â”œâ”€â”€ ");
     if (dir == Direction::LEFT)  cout << YELLOW << "L" << RESET << ": ";
     if (dir == Direction::RIGHT) cout << GREEN << "R" << RESET << ": ";
 
@@ -158,6 +161,6 @@ void BST<T>::printInfo(Node<T>* node, std::string indent, bool is_last, Directio
 
     while(!children.empty()) {
         auto child = children.front(); children.pop();
-        printInfo(child.first, indent + ((is_last) ? "    " : "¦¢   "), children.empty(), child.second);
+        printInfo(child.first, indent + ((is_last) ? "    " : "â”‚   "), children.empty(), child.second);
     }
 }
