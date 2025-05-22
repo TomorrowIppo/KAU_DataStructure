@@ -25,10 +25,21 @@ public:
     virtual Node<T>* search(int key) const;
     virtual void remove(int key);
 
-    Node<T>* get_root() const { return root; }
-    void inorder() const { inorder_helper(root); std::cout << std::endl; }
-    void printInfo(Node<T>* node = nullptr, std::string indent = "", bool is_last = true, Direction dir = Direction::ROOT);
+    Node<T>* get_root() const { 
+        return root; 
+    }
 
+    void inorder() const { 
+        inorder_helper(root); std::cout << std::endl; 
+    }
+
+    void printInfo(
+        Node<T>* node = nullptr,
+        std::string indent = "",
+        bool is_last = true,
+        Direction dir = Direction::ROOT
+    );
+    
 protected:
     Node<T>* find_min(Node<T>* node) const;
     virtual Node<T>* recursive_insert(Node<T>* cur, Node<T>* node);
@@ -80,7 +91,7 @@ Node<T>* BST<T>::search(int key) const {
 template <typename T>
 void BST<T>::remove(int key) {
     root = remove_node(root, key);
-    if (root) root->set_parent(nullptr); // root는 부모 없음을 보장장
+    if (root) root->set_parent(nullptr); // root는 부모 없음을 보장
 }
 
 template <typename T>
@@ -92,22 +103,20 @@ Node<T>* BST<T>::remove_node(Node<T>* cur, int key) {
     } else if (key > cur->get_key()) {
         cur->set_right(remove_node(cur->get_right(), key));
     } else {
+        // Case 1: Leaf 노드
         if (!cur->get_left() && !cur->get_right()) {
             delete cur;
             return nullptr;
         }
-        if (!cur->get_left()) {
-            Node<T>* temp = cur->get_right();
-            temp->set_parent(cur->get_parent());
+
+        // Case 2: 자식이 1개 있을 경우
+        if (!cur->get_left() || !cur->get_right()) {
+            Node<T>* temp = cur->get_left() ? cur->get_left() : cur->get_right();
             delete cur;
             return temp;
         }
-        if (!cur->get_right()) {
-            Node<T>* temp = cur->get_left();
-            temp->set_parent(cur->get_parent());
-            delete cur;
-            return temp;
-        }
+
+        // Case 3: 자식이 2개 있을 경우
         Node<T>* successor = find_min(cur->get_right());
         cur->set_key(successor->get_key());
         cur->set_value(successor->get_value());
