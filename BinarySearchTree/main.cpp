@@ -44,12 +44,12 @@ int main()
     // avl->inorder();
     avl->printInfo();
 
-    cout << "---------------------------------------------------------" << endl;
-    cout << "[BST destructor]" << endl; 
-    delete bst;
-    cout << "---------------------------------------------------------" << endl;
-    cout << "[BST destructor]" << endl; 
-    delete avl;
+    // cout << "---------------------------------------------------------" << endl;
+    // cout << "[BST destructor]" << endl; 
+    // delete bst;
+    // cout << "---------------------------------------------------------" << endl;
+    // cout << "[BST destructor]" << endl; 
+    // delete avl;
 
     return 0;
 }

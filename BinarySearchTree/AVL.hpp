@@ -65,7 +65,7 @@ Node<T>* AVLTree<T>::recursive_insert(Node<T>* cur, Node<T>* node) {
     update_height(cur);
     int balance = get_balance(cur);
 
-    if (balance > 1 && node->get_key() < cur->get_left()->get_key())
+    if (balance > 1 && node->get_key() < cur->get_left()->get_key()) 
         return rotate_right(cur);
 
     if (balance < -1 && node->get_key() > cur->get_right()->get_key())
