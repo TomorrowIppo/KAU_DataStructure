@@ -36,7 +36,15 @@ int main() {
     graph.printGraph();
 
     // isEmpty 검사
-    std::cout << "\n그래프가 비어있나요? " << (graph.isEmpty() ? "Yes" : "No") << "\n\n";
+    std::cout << "\n그래프가 비어있나요? " << (graph.isEmpty() ? "Yes" : "No") << "\n";
+
+    // Vertices 검사
+    auto all_v = graph.getVertices();
+    std::cout << "\n정점들 : ";
+    for(auto v : all_v) {
+        std::cout << v << ' ';
+    }
+    std::cout << "\n";
 
     return 0;
 }

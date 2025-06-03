@@ -6,6 +6,7 @@
 class IGraph {
 public:
     virtual std::vector<int> getAdjacency(int v) const = 0;
+    virtual std::vector<int> getVertices() const = 0;
     virtual bool isEmpty() const = 0;
 
     // 삽입

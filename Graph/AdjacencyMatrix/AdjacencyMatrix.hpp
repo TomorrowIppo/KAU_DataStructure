@@ -3,6 +3,11 @@
 #include <iomanip>
 #include "../IGraph.hpp"
 
+/*
+인접행렬에서 비연속적인 정점을 추가할 때 사이에 빈 정점이 생길 수 있으나, 
+현재는 큰 필요성을 느끼지 않아 별도의 vertices 멤버변수를 두지 않고 의미 있는 정점만 관리하는 기능은 구현하지 않았습니다.
+*/
+
 class AdjacencyMatrix : public IGraph {
 private:
     std::vector<std::vector<int>> matrix;
@@ -17,6 +22,7 @@ public:
         {}
 
     std::vector<int> getAdjacency(int v) const override;
+    std::vector<int> getVertices() const override;
     bool isEmpty() const override;
     void insertVertex(int v) override;
     void insertEdge(int u, int v) override;
@@ -35,6 +41,15 @@ inline std::vector<int> AdjacencyMatrix::getAdjacency(int v) const {
     for(int i = 1; i < this->matrix[v].size(); i++)
         if(this->matrix[v][i]) adj.push_back(i);
     return adj;
+}
+
+inline std::vector<int> AdjacencyMatrix::getVertices() const {
+    std::vector<int> vertices;
+    // 1부터 v_cnt까지 정점 번호를 모두 추가
+    for (int v = 1; v <= v_cnt; ++v) {
+        vertices.push_back(v);
+    }
+    return vertices;
 }
 
 inline bool AdjacencyMatrix::isEmpty() const {

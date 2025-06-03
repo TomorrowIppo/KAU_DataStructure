@@ -23,6 +23,7 @@ public:
     ~AdjacencyList();
 
     std::vector<int> getAdjacency(int v) const override;
+    std::vector<int> getVertices() const override;
     bool isEmpty() const override;
     void insertVertex(int v) override;
     void insertEdge(int u, int v) override;
@@ -121,6 +122,16 @@ inline std::vector<int> AdjacencyList::getAdjacency(int v) const {
         cur = cur->next;
     }
     return adj;
+}
+
+std::vector<int> AdjacencyList::getVertices() const {
+    std::vector<int> vertices;
+    vertices.reserve(table.size());
+
+    for (const auto& pair : table) {
+        vertices.push_back(pair.first);
+    }
+    return vertices;
 }
 
 inline bool AdjacencyList::isEmpty() const {
