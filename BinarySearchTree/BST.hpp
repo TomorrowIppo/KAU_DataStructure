@@ -53,7 +53,7 @@ template <typename T>
 void BST<T>::insert(int key, const T& value) {
     Node<T>* node = new Node<T>(key, value);
     root = recursive_insert(root, node);
-    if (root) root->set_parent(nullptr); // rootëŠ” ë¶€ëª¨ ì—†ìŒì„ ë³´ìž¥
+    if (root) root->set_parent(nullptr); // root´Â ºÎ¸ð ¾øÀ½À» º¸Àå
 }
 
 template <typename T>
@@ -87,7 +87,7 @@ Node<T>* BST<T>::search(int key) const {
 template <typename T>
 void BST<T>::remove(int key) {
     root = remove_node(root, key);
-    if (root) root->set_parent(nullptr); // rootëŠ” ë¶€ëª¨ ì—†ìŒì„ ë³´ìž¥ìž¥
+    if (root) root->set_parent(nullptr); // root´Â ºÎ¸ð ¾øÀ½À» º¸ÀåÀå
 }
 
 template <typename T>
@@ -156,7 +156,7 @@ void BST<T>::printInfo_helper(Node<T>* node, std::string indent, bool is_last, D
 
     if (!node) node = this->root;
 
-    cout << indent << (is_last ? "â””â”€â”€ " : "â”œâ”€â”€ ");
+    cout << indent << (is_last ? "¦¦¦¡¦¡ " : "¦§¦¡¦¡ ");
     if (dir == Direction::LEFT)  cout << YELLOW << "L" << RESET << ": ";
     if (dir == Direction::RIGHT) cout << GREEN << "R" << RESET << ": ";
 
@@ -168,6 +168,6 @@ void BST<T>::printInfo_helper(Node<T>* node, std::string indent, bool is_last, D
 
     while(!children.empty()) {
         auto child = children.front(); children.pop();
-        printInfo_helper(child.first, indent + ((is_last) ? "    " : "â”‚   "), children.empty(), child.second);
+        printInfo_helper(child.first, indent + ((is_last) ? "    " : "¦¢   "), children.empty(), child.second);
     }
 }
