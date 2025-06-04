@@ -7,7 +7,7 @@
 
 namespace GraphSearch {
 
-    void dfsUtil(const IGraph& g, int v, std::unordered_set<int>& visited) {
+    inline void dfsUtil(const IGraph& g, int v, std::unordered_set<int>& visited) {
         if (visited.count(v)) return;
 
         visited.insert(v);
@@ -18,13 +18,13 @@ namespace GraphSearch {
         }
     }
 
-    void dfs(const IGraph& g, int start) {
+    inline void dfs(const IGraph& g, int start) {
         std::unordered_set<int> visited;
         dfsUtil(g, start, visited);
         std::cout << std::endl;
     }
 
-    void bfs(const IGraph& g, int start) {
+    inline void bfs(const IGraph& g, int start) {
         std::unordered_set<int> visited;
         std::queue<int> q;
 

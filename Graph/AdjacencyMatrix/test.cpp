@@ -46,5 +46,8 @@ int main() {
     }
     std::cout << "\n";
 
+    // Weight 검사
+    std::cout << "\n간선 (7, 1)의 weight : " << graph.getWeight(7, 1) << "\n";
+
     return 0;
 }
