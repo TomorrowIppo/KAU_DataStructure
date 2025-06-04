@@ -13,12 +13,14 @@ private:
     std::vector<std::vector<int>> matrix;
     int v_cnt;
     int e_cnt;
+    bool dir;
 
 public:
-    AdjacencyMatrix(int n) : 
+    AdjacencyMatrix(int n, bool dir = false) : 
         matrix(n + 1, std::vector<int>(n + 1, INF)), 
         v_cnt(n),
-        e_cnt(0) 
+        e_cnt(0),
+        dir(dir) 
         {}
 
     std::vector<int> getAdjacency(int v) const override;
@@ -27,6 +29,8 @@ public:
     bool isEmpty() const override;
     void insertVertex(int v) override;
     void insertEdge(int u, int v, int w) override;
+    void setDirected(bool directed) override;
+    bool isDirected() const override;
     void deleteVertex(int v) override;
     void deleteEdge(int u, int v) override;
     void printGraph() const override;
@@ -78,6 +82,19 @@ inline void AdjacencyMatrix::insertEdge(int u, int v, int w) {
 
     this->matrix[u][v] = w;
     this->e_cnt++;
+
+    if(!this->dir) {
+        this->matrix[v][u] = w;
+        this->e_cnt++;
+    }
+}
+
+inline void AdjacencyMatrix::setDirected(bool directed) {
+    this->dir = directed;
+}
+
+inline bool AdjacencyMatrix::isDirected() const {
+    return this->dir;
 }
 
 inline void AdjacencyMatrix::deleteVertex(int v) {

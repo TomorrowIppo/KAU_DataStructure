@@ -3,12 +3,12 @@
 
 int main() {
     // 정점 5개짜리 그래프 생성
-    AdjacencyList graph;
+    AdjacencyList graph(true);
 
     // isEmpty 검사
     std::cout << "\n그래프가 비어있나요? " << (graph.isEmpty() ? "Yes" : "No") << "\n\n";
 
-    // 간선 추가 (방향 그래프)
+    // 간선 추가 (무방향 그래프)
     graph.insertEdge(1, 2, 1);
     graph.insertEdge(1, 3, 3);
     graph.insertEdge(2, 4, 9);

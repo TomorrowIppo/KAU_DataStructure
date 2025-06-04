@@ -18,9 +18,10 @@ private:
     // unordered_map이 평균적으로 더 빠르지만,
     // 정점 ID를 오름차순으로 출력하기 위해 학습 목적상 map 사용
     std::map<int, EdgeVertex*> table;
+    bool dir;
 
 public:
-    AdjacencyList();
+    AdjacencyList(bool dir = false) : dir(dir) {}
     ~AdjacencyList();
 
     std::vector<int> getAdjacency(int v) const override;
@@ -29,12 +30,12 @@ public:
     bool isEmpty() const override;
     void insertVertex(int v) override;
     void insertEdge(int u, int v, int w) override;
+    void setDirected(bool directed) override;
+    bool isDirected() const override;
     void deleteVertex(int v) override;
     void deleteEdge(int u, int v) override;
     void printGraph() const override;
 };
-
-inline AdjacencyList::AdjacencyList() {}
 
 inline AdjacencyList::~AdjacencyList() {
     for (auto& item : this->table) {
@@ -62,6 +63,20 @@ inline void AdjacencyList::insertEdge(int u, int v, int w) {
 
     EdgeVertex* newNode = new EdgeVertex(v, w, this->table[u]);
     this->table[u] = newNode;
+
+    // 무방향일 경우 v -> u도 삽입
+    if (!this->dir) {
+        EdgeVertex* revNode = new EdgeVertex(u, w, this->table[v]);
+        this->table[v] = revNode;
+    }
+}
+
+inline void AdjacencyList::setDirected(bool directed) {
+    this->dir = directed;
+}
+
+inline bool AdjacencyList::isDirected() const {
+    return this->dir;
 }
 
 inline void AdjacencyList::deleteEdge(int u, int v) {
