@@ -30,4 +30,33 @@ namespace GraphSearch {
             return true;
         }
     };
+
+    inline void kruskal(IGraph &g) {
+        std::vector<std::tuple<int, int, int>> edges;
+        std::vector<int> vertices = g.getVertices();
+        
+        for (int u : vertices) {
+            for (int v : g.getAdjacency(u)) {
+                if (u < v)  // 중복 방지
+                    edges.push_back({g.getWeight(u, v), u, v});
+            }
+        }
+        std::sort(edges.begin(), edges.end());
+
+        int size = vertices.size();
+        UnionFind uf(size);
+        int total = 0;
+
+        std::cout << "Edges in MST:\n";
+
+        for (const auto& [w, u, v] : edges) {
+            if (uf.find_root(u) != uf.find_root(v)) {
+                uf.merge(u, v);
+                std::cout << u << " - " << v << " : " << w << "\n";
+                total += w;
+            }
+        }
+
+        std::cout << "Total Weight of MST: " << total << "\n";
+    }
 } // namespace GraphSearch
