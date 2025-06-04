@@ -85,7 +85,7 @@ void PriorityQueue<T>::printRecursive(int idx, string indent, bool is_last) cons
 
     cout << indent;
     if (idx != 1) {
-        cout << (is_last ? "¦¦¦¡¦¡ " : "¦§¦¡¦¡ ");
+        cout << (is_last ? "â””â”€â”€ " : "â”œâ”€â”€ ");
     }
 
     cout << CYAN << idx << RESET << ":(" << this->node[idx].getKey() << "," << this->node[idx].getValue() << ")\n";
@@ -93,15 +93,15 @@ void PriorityQueue<T>::printRecursive(int idx, string indent, bool is_last) cons
     int left = getLeftIndex(idx);
     int right = getRightIndex(idx);
 
-    // ÀÚ½Ä Á¸Àç ¿©ºÎ È®ÀÎ
+    // ìì‹ ì¡´ì¬ ì—¬ë¶€ í™•ì¸
     bool has_left = (left <= this->size);
     bool has_right = (right <= this->size);
 
     if (has_left) {
-        printRecursive(left, indent + (is_last ? "    " : "¦¢   "), !has_right);
+        printRecursive(left, indent + (is_last ? "    " : "â”‚   "), !has_right);
     }
     if (has_right) {
-        printRecursive(right, indent + (is_last ? "    " : "¦¢   "), true);
+        printRecursive(right, indent + (is_last ? "    " : "â”‚   "), true);
     }
 }
 
@@ -125,14 +125,14 @@ void PriorityQueue<T>::Insert(int key, T value)
 
     int idx = ++this->size;
 
-    // Á¶°Ç¿¡ ºÎÇÕÇÏ´Â ºÎ¸ğ ³ëµå¸¦ ´Ù ¹ØÀ¸·Î ³»¸²
+    // ì¡°ê±´ì— ë¶€í•©í•˜ëŠ” ë¶€ëª¨ ë…¸ë“œë¥¼ ë‹¤ ë°‘ìœ¼ë¡œ ë‚´ë¦¼
     while(idx != 1 && getCondition(this->node[getParentIndex(idx)].getKey(), key)) 
     {
         this->node[idx] = this->node[getParentIndex(idx)];
         idx = getParentIndex(idx);
     }
 
-    // ÃÖÁ¾ À§Ä¡¿¡¼­ ¼³Á¤
+    // ìµœì¢… ìœ„ì¹˜ì—ì„œ ì„¤ì •
     node[idx].setKey(key);
     node[idx].setValue(value);
 }
@@ -158,7 +158,7 @@ Node<T> PriorityQueue<T>::Delete()
         if(right <= this->size && getCondition(node[largest_idx].getKey(), node[right].getKey()))
             largest_idx = right;
 
-        if(largest_idx == idx) break;   // º¯°æ»çÇ×ÀÌ ¾øÀ½Àº Á¶°ÇÀ» ÃæÁ·ÇßÀ½À» ÀÇ¹Ì
+        if(largest_idx == idx) break;   // ë³€ê²½ì‚¬í•­ì´ ì—†ìŒì€ ì¡°ê±´ì„ ì¶©ì¡±í–ˆìŒì„ ì˜ë¯¸
 
         swap(this->node[idx], this->node[largest_idx]);
         idx = largest_idx;
@@ -225,3 +225,37 @@ void PriorityQueue<T>::printInfo() const
 }
 
 #pragma endregion
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    PriorityQueue<char>* pq = new PriorityQueue<char>(HeapType::MIN);
+    pq->Insert(9, 'A');
+    pq->Insert(7, 'B');
+    pq->Insert(6, 'C');
+    pq->Insert(5, 'D');
+    pq->Insert(4, 'E');
+    pq->Insert(5, 'F');
+    pq->Insert(3, 'G');
+    pq->Insert(2, 'H');
+    pq->Insert(1, 'I');
+    pq->Insert(3, 'J');
+    pq->Insert(2, 'K');
+
+    pq->printInfo();
+    cout << "------------------------------------------" << ENDL;
+
+    auto pop = pq->Delete();
+    cout << "Pop : (" << pop.getKey() << "," << pop.getValue() << ")" << ENDL;
+
+    auto top = pq->Top();
+    cout << "Top : (" << top.getKey() << "," << top.getValue() << ")" << ENDL;
+
+    pq->printInfo();
+
+    delete pq;
+
+    return 0;
+}

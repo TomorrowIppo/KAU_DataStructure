@@ -2,7 +2,8 @@
 #include "../AdjacencyMatrix/AdjacencyMatrix.hpp"
 #include "../AdjacencyList/AdjacencyList.hpp"
 #include "Kruskal.hpp"
-#include "Prim.hpp"
+
+using namespace std;
 
 int main() {
     AdjacencyMatrix g(5);    // 무방향 그래프
@@ -17,7 +18,6 @@ int main() {
     g.printGraph();
     std::cout << "\n";
     GraphSearch::kruskal(g);
-    GraphSearch::prim(g);
 
     return 0;
 }

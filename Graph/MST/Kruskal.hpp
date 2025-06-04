@@ -47,7 +47,7 @@ namespace GraphSearch {
         UnionFind uf(size);
         int total = 0;
 
-        std::cout << "[Kruskal] Edges in MST:\n";
+        std::cout << "Edges in MST:\n";
 
         for (const auto& [w, u, v] : edges) {
             if (uf.find_root(u) != uf.find_root(v)) {
@@ -57,6 +57,6 @@ namespace GraphSearch {
             }
         }
 
-        std::cout << "Total Weight of MST: " << total << "\n\n";
+        std::cout << "Total Weight of MST: " << total << "\n";
     }
 } // namespace GraphSearch
