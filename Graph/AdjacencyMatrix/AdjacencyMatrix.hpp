@@ -144,6 +144,8 @@ inline void AdjacencyMatrix::printGraph() const
     constexpr int NO_EDGE_PRINT_WIDTH = CELL_WIDTH;
     constexpr const char* NO_EDGE_SYMBOL = ".";
 
+    std::cout << "[AdjMatrix]\n";
+
     // Header row: vertex numbers in green
     std::cout << "    ";
     for (int j = 1; j < n; ++j)

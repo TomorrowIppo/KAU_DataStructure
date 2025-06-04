@@ -179,6 +179,7 @@ inline void AdjacencyList::printGraph() const {
         return;
     }
 
+    std::cout << "[AdjList]\n";
     for (const auto& item : this->table) {
         int v = item.first;
         EdgeVertex* cur = item.second;

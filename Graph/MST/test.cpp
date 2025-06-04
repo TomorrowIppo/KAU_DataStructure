@@ -16,6 +16,7 @@ int main() {
     g.insertEdge(5, 1, 7);
 
     g.printGraph();
+    std::cout << "\n";
     GraphSearch::kruskal(g);
 
     return 0;

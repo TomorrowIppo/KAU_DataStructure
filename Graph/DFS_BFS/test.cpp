@@ -4,7 +4,6 @@
 
 int main() {
     // 인접행렬 탐색
-    std::cout << "[AdjMatrix]\n";
 
     AdjacencyMatrix g(5);
 
@@ -25,7 +24,6 @@ int main() {
     GraphSearch::bfs(g, 1);
 
     std::cout << "\n-------------------------------------------------------------------------------\n\n";
-    std::cout << "[AdjList]\n";
 
     // 인접리스트 탐색
     AdjacencyList h;
