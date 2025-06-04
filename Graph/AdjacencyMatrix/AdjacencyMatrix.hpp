@@ -23,6 +23,7 @@ public:
 
     std::vector<int> getAdjacency(int v) const override;
     std::vector<int> getVertices() const override;
+    int getWeight(int u, int v) const override;
     bool isEmpty() const override;
     void insertVertex(int v) override;
     void insertEdge(int u, int v, int w) override;
@@ -50,6 +51,10 @@ inline std::vector<int> AdjacencyMatrix::getVertices() const {
         vertices.push_back(v);
     }
     return vertices;
+}
+
+inline int AdjacencyMatrix::getWeight(int u, int v) const {
+    return this->matrix[u][v];
 }
 
 inline bool AdjacencyMatrix::isEmpty() const {
