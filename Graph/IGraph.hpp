@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 
+#define INF 1e9
+
 class IGraph {
 public:
     virtual std::vector<int> getAdjacency(int v) const = 0;
@@ -11,7 +13,7 @@ public:
 
     // 삽입
     virtual void insertVertex(int v) = 0;
-    virtual void insertEdge(int u, int v) = 0;
+    virtual void insertEdge(int u, int v, int w) = 0;
 
     // 삭제
     virtual void deleteVertex(int v) = 0;

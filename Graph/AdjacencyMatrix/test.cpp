@@ -2,45 +2,45 @@
 #include "AdjacencyMatrix.hpp"
 
 int main() {
-    // Á¤Á¡ 5°³Â¥¸® ±×·¡ÇÁ »ı¼º
+    // ì •ì  5ê°œì§œë¦¬ ê·¸ë˜í”„ ìƒì„±
     AdjacencyMatrix graph(5);
 
-    // isEmpty °Ë»ç
-    std::cout << "\n±×·¡ÇÁ°¡ ºñ¾îÀÖ³ª¿ä? " << (graph.isEmpty() ? "Yes" : "No") << "\n\n";
+    // isEmpty ê²€ì‚¬
+    std::cout << "\nê·¸ë˜í”„ê°€ ë¹„ì–´ìˆë‚˜ìš”? " << (graph.isEmpty() ? "Yes" : "No") << "\n\n";
 
-    // °£¼± Ãß°¡ (¹æÇâ ±×·¡ÇÁ)
-    graph.insertEdge(1, 2);
-    graph.insertEdge(1, 3);
-    graph.insertEdge(2, 4);
-    graph.insertEdge(3, 5);
-    graph.insertEdge(5, 1);
+    // ê°„ì„  ì¶”ê°€ (ë°©í–¥ ê·¸ë˜í”„)
+    graph.insertEdge(1, 2, 1);
+    graph.insertEdge(1, 3, 2);
+    graph.insertEdge(2, 4, 11);
+    graph.insertEdge(3, 5, 5);
+    graph.insertEdge(5, 1, 7);
 
-    std::cout << "±×·¡ÇÁ »óÅÂ (ÃÊ±â):\n";
+    std::cout << "ê·¸ë˜í”„ ìƒíƒœ (ì´ˆê¸°):\n";
     graph.printGraph();
 
-    // °£¼± »èÁ¦
+    // ê°„ì„  ì‚­ì œ
     graph.deleteEdge(1, 3);
-    std::cout << "\n°£¼± (1->3) »èÁ¦ ÈÄ:\n";
+    std::cout << "\nê°„ì„  (1->3) ì‚­ì œ í›„:\n";
     graph.printGraph();
 
-    // Á¤Á¡ »èÁ¦ (°£¼± Á¦°Å¸¸)
+    // ì •ì  ì‚­ì œ (ê°„ì„  ì œê±°ë§Œ)
     graph.deleteVertex(2);
-    std::cout << "\nÁ¤Á¡ 2 »èÁ¦ (°£¼± Á¦°Å) ÈÄ:\n";
+    std::cout << "\nì •ì  2 ì‚­ì œ (ê°„ì„  ì œê±°) í›„:\n";
     graph.printGraph();
 
-    // Á¤Á¡ Ãß°¡ (»ç½Ç insertVertex´Â Å©±â Á¶Á¤¿ëÀÌ¹Ç·Î v=7 ³Ö¾îº½)
+    // ì •ì  ì¶”ê°€ (ì‚¬ì‹¤ insertVertexëŠ” í¬ê¸° ì¡°ì •ìš©ì´ë¯€ë¡œ v=7 ë„£ì–´ë´„)
     graph.insertVertex(7);
-    graph.insertEdge(6, 7);
-    graph.insertEdge(7, 1);
-    std::cout << "\nÁ¤Á¡ 7 Ãß°¡ ¹× (6, 7), (7, 1) °£¼± »ı¼º ÈÄ:\n";
+    graph.insertEdge(6, 7, 9);
+    graph.insertEdge(7, 1, 14);
+    std::cout << "\nì •ì  7 ì¶”ê°€ ë° (6, 7), (7, 1) ê°„ì„  ìƒì„± í›„:\n";
     graph.printGraph();
 
-    // isEmpty °Ë»ç
-    std::cout << "\n±×·¡ÇÁ°¡ ºñ¾îÀÖ³ª¿ä? " << (graph.isEmpty() ? "Yes" : "No") << "\n";
+    // isEmpty ê²€ì‚¬
+    std::cout << "\nê·¸ë˜í”„ê°€ ë¹„ì–´ìˆë‚˜ìš”? " << (graph.isEmpty() ? "Yes" : "No") << "\n";
 
-    // Vertices °Ë»ç
+    // Vertices ê²€ì‚¬
     auto all_v = graph.getVertices();
-    std::cout << "\nÁ¤Á¡µé : ";
+    std::cout << "\nì •ì ë“¤ : ";
     for(auto v : all_v) {
         std::cout << v << ' ';
     }

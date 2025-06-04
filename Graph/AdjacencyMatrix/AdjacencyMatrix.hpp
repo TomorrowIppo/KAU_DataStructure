@@ -16,7 +16,7 @@ private:
 
 public:
     AdjacencyMatrix(int n) : 
-        matrix(n + 1, std::vector<int>(n + 1, 0)), 
+        matrix(n + 1, std::vector<int>(n + 1, INF)), 
         v_cnt(n),
         e_cnt(0) 
         {}
@@ -25,7 +25,7 @@ public:
     std::vector<int> getVertices() const override;
     bool isEmpty() const override;
     void insertVertex(int v) override;
-    void insertEdge(int u, int v) override;
+    void insertEdge(int u, int v, int w) override;
     void deleteVertex(int v) override;
     void deleteEdge(int u, int v) override;
     void printGraph() const override;
@@ -62,16 +62,16 @@ inline void AdjacencyMatrix::insertVertex(int v) {
 
     this->matrix.resize(v + 1);
     for(auto& row : this->matrix)
-        row.resize(v + 1, 0);
+        row.resize(v + 1, INF);
     
     this->v_cnt = v;
 }
 
-inline void AdjacencyMatrix::insertEdge(int u, int v) {
+inline void AdjacencyMatrix::insertEdge(int u, int v, int w) {
     if (u < 1 || v < 1 || u >= this->matrix.size() || v >= this->matrix.size())
         throw std::out_of_range("Invalid vertex index in insertEdge");
 
-    this->matrix[u][v] = 1;
+    this->matrix[u][v] = w;
     this->e_cnt++;
 }
 
@@ -82,11 +82,11 @@ inline void AdjacencyMatrix::deleteVertex(int v) {
 
     for (int i = 1; i < this->matrix.size(); i++) {
         if(this->matrix[v][i]) {
-            this->matrix[v][i] = 0;
+            this->matrix[v][i] = INF;
             this->e_cnt--;
         }
         if(this->matrix[i][v]) {
-            this->matrix[i][v] = 0;
+            this->matrix[i][v] = INF;
             this->e_cnt--;
         }
     }
@@ -96,10 +96,16 @@ inline void AdjacencyMatrix::deleteEdge(int u, int v) {
     if (u < 1 || v < 1 || u >= this->matrix.size() || v >= this->matrix.size())
         throw std::out_of_range("Invalid vertex index in deleteEdge");
 
-    this->matrix[u][v] = 0;
+    this->matrix[u][v] = INF;
     this->e_cnt--;
 }
 
+/**
+ * @brief 인접 행렬 그래프를 콘솔에 예쁘게 출력합니다.
+ *
+ * 정점 번호는 초록색(GREEN), 존재하는 간선 가중치는 파란색(BLUE)으로 출력됩니다.
+ * 간선이 없는 경우에는 '.' 기호로 표시하며, 모든 셀은 고정폭으로 정렬됩니다.
+ */
 inline void AdjacencyMatrix::printGraph() const
 {
     int n = matrix.size();
@@ -109,22 +115,29 @@ inline void AdjacencyMatrix::printGraph() const
     }
 
     constexpr const char* GREEN = "\033[32m";
-    constexpr const char* BLUE = "\033[34m";
+    constexpr const char* BLUE  = "\033[34m";
     constexpr const char* RESET = "\033[0m";
 
-    // 헤더 행: 정점 번호 초록색 출력
-    std::cout << "    ";  // 왼쪽 공간
-    for (int i = 1; i < n; ++i)
-        std::cout << GREEN << std::setw(2) << i << RESET << " ";
+    constexpr int CELL_WIDTH = 3;
+    constexpr int NO_EDGE_PRINT_WIDTH = CELL_WIDTH;
+    constexpr const char* NO_EDGE_SYMBOL = ".";
+
+    // Header row: vertex numbers in green
+    std::cout << "    ";
+    for (int j = 1; j < n; ++j)
+        std::cout << GREEN << std::setw(CELL_WIDTH) << j << RESET;
     std::cout << "\n";
 
     for (int i = 1; i < n; ++i) {
-        std::cout << GREEN << std::setw(2) << i << RESET << ": ";
+        // Row header: vertex number in green
+        std::cout << GREEN << std::setw(3) << i << RESET << ":";
+
         for (int j = 1; j < n; ++j) {
-            if (matrix[i][j] == 1)
-                std::cout << BLUE << std::setw(2) << 1 << RESET << " ";
+            int val = this->matrix[i][j];
+            if (val == INF)
+                std::cout << std::setw(NO_EDGE_PRINT_WIDTH) << NO_EDGE_SYMBOL;
             else
-                std::cout << std::setw(2) << 0 << " ";
+                std::cout << BLUE << std::setw(CELL_WIDTH) << val << RESET;
         }
         std::cout << "\n";
     }

@@ -8,12 +8,12 @@ int main() {
 
     AdjacencyMatrix g(5);
 
-    g.insertEdge(1, 2);
-    g.insertEdge(1, 4);
-    g.insertEdge(2, 3);
-    g.insertEdge(2, 5);
-    g.insertEdge(4, 5); 
-    g.insertEdge(3, 1); // 순환 발생
+    g.insertEdge(1, 2, 15);
+    g.insertEdge(1, 4, 20);
+    g.insertEdge(2, 3, -9);
+    g.insertEdge(2, 5, 1);
+    g.insertEdge(4, 5, 3); 
+    g.insertEdge(3, 1, 0); // 순환 발생
 
     // 그래프 형태 출력
     g.printGraph();
@@ -30,12 +30,12 @@ int main() {
     // 인접리스트 탐색
     AdjacencyList h;
 
-    h.insertEdge(1, 2);
-    h.insertEdge(1, 4);
-    h.insertEdge(2, 3);
-    h.insertEdge(2, 5);
-    h.insertEdge(4, 5); 
-    h.insertEdge(3, 1); // 순환 발생
+    h.insertEdge(1, 2, 15);
+    h.insertEdge(1, 4, 20);
+    h.insertEdge(2, 3, -9);
+    h.insertEdge(2, 5, 1);
+    h.insertEdge(4, 5, 3); 
+    h.insertEdge(3, 1, 0); // 순환 발생
 
     // 그래프 형태 출력
     h.printGraph();
